@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: backend-lab-postgres
+    environment:
+      POSTGRES_USER: lab
+      POSTGRES_PASSWORD: lab_local_only
+      POSTGRES_DB: backend_lab
+    ports:
+      # Bound to localhost only; 5434 avoids clashing with other local Postgres instances (5432, 5433).
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - backend_lab_pgdata:/var/lib/postgresql/data
+
+volumes:
+  backend_lab_pgdata:
